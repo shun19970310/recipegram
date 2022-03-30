@@ -1,2 +1,44 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<section class="hero is-success">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        マイページ
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="columns is-centered">
+          <div class="column is-4">
+            <figure class="image is-128x128"  style="margin-left: auto; margin-right: auto;">
+<!--showアクションで定義した@userのユーザーネームを表示させる-->
+             <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpeg", class: "profile_image is-rounded" %>
+            </figure>
+          </div>
+          <div class="column is-8">
+            <table class="table is-fullwidth">
+              <tr>
+                <td class="is-size-4">
+                 <strong><%= @user.username %></strong>
+                </td>
+                <td class="is-size-4">
+                 <%= @user.email %>
+                </td>
+              </tr>
+            </table>
+            <table class="table is-fullwidth">
+              <tr>
+                <td>
+                  <%= @user.profile %>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

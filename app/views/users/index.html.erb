@@ -1,13 +1,49 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
-<!--@usersの中に含まれる配列をeachで一つずつ取り出す-->
-<!--取り出したものをuserという変数に入れるので|user|-->
-<% @users.each do |user|%>
-<!--image_tag userのuserは@usersの一つずつを格納した変数userを指す-->
-<!--どのカラムを使用するかprofile_image、ここもidは記述しない-->
-<!--fallbackは画像が何も設定されていないときに任意の画像を表示させるコマンド-->
-<!--画像はassets/imagesの中に格納-->
-<%= attachment_image_tag user, :profile_image, fallback: "no_image.jpeg" %>
-<!--user.usernameでユーザーネームを取り出す-->
-<%= user.username %>
-<% end %>
+<section class="hero is-success">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        レシピグラマー一覧
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+    <!--@usersの中に含まれる配列をeachで一つずつ取り出す-->
+    <!--取り出したものをuserという変数に入れるので|user|-->
+     <% @users.each do |user|%>
+      <div class="column is-3">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-image">
+                <figure class="image">
+                 <!--link_to user_path(遷移したいページへのパス,今回は詳細ページ)(user)誰の詳細ページへ行きたいのかを示すのに変数userを記述-->
+                 <%= link_to user_path(user) do %>
+                  <!--image_tag userのuserは@usersの一つずつを格納した変数userを指す-->
+                  <!--どのカラムを使用するかprofile_image、ここもidは記述しない-->
+                  <!--fallbackは画像が何も設定されていないときに任意の画像を表示させるコマンド-->
+                  <!--画像はassets/imagesの中に格納-->
+                  <%= attachment_image_tag user, :profile_image, fallback: "no_image.jpeg" %>
+                 <% end %>
+                </figure>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <!--user.usernameでユーザーネームを取り出す-->
+                  <!--user.usernameにリンクを付けたい、profile_imageと同様に詳細ページに遷移するパスをつける-->
+                 <div class="title"><%= link_to user.username, user_path(user)%></div>
+                </div>
+              </div>
+              <div class="content">
+                投稿数：
+              </div>
+            </div>
+          </div>
+      </div>
+     <% end %>
+    </div>
+  </div>
+</section>
