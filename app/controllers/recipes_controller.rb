@@ -3,14 +3,15 @@ class RecipesController < ApplicationController
   end
 
   def show
+    # 一つのレシピの情報を取得し、@userに代入している
+    # params[:id]はカーソルを合わせた時に出てくるusers/1といった各々のidを持ってきている
+    @recipe = Recipe.find(params[:id])
   end
 
   def new
     # recipeモデルから空のモデルを持ってくる
     @recipe = Recipe.new
   end
-
-
   # データベースに登録するアクション
   def create
     @recipe = Recipe.new(recipe_params)
