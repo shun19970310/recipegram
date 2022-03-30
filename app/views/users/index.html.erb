@@ -20,7 +20,7 @@
                 <figure class="image">
                  <!--link_to user_path(遷移したいページへのパス,今回は詳細ページ)(user)誰の詳細ページへ行きたいのかを示すのに変数userを記述-->
                  <%= link_to user_path(user) do %>
-                  <!--image_tag userのuserは@usersの一つずつを格納した変数userを指す-->
+                  <!--image_tag userのuserは@usersの一つずつを格納した変数|user|を指す-->
                   <!--どのカラムを使用するかprofile_image、ここもidは記述しない-->
                   <!--fallbackは画像が何も設定されていないときに任意の画像を表示させるコマンド-->
                   <!--画像はassets/imagesの中に格納-->

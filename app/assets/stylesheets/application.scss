@@ -1,3 +1,4 @@
+@import "bulma";
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -13,8 +14,13 @@
  *= require_tree .
  *= require_self
  */
-@import "bulma";
 // フラッシュメッセージの余白を調整
 .notification:not(:last-child){
 	margin-bottom: 0;
+
 }
+// 画像を円形にするcssコード
+.profile_image {
+  border-radius: 50%;
+}
+

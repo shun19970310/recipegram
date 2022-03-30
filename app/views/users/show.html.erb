@@ -14,7 +14,7 @@
         <div class="columns is-centered">
           <div class="column is-4">
             <figure class="image is-128x128"  style="margin-left: auto; margin-right: auto;">
-<!--showアクションで定義した@userのユーザーネームを表示させる-->
+             <!--showアクションで定義した@userのプロフィール画像を表示させる-->
              <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpeg", class: "profile_image is-rounded" %>
             </figure>
           </div>
@@ -22,11 +22,22 @@
             <table class="table is-fullwidth">
               <tr>
                 <td class="is-size-4">
+                <!--showアクションで定義した@userのユーザーネームを表示させる-->
                  <strong><%= @user.username %></strong>
                 </td>
-                <td class="is-size-4">
-                 <%= @user.email %>
-                </td>
+                <!--emailは個人情報なので自身の詳細ページでは表示しても他のユーザーからは閲覧できないようにしたい-->
+                <!--deviseはログインしているユーザーの情報はcurrent_userから取得できる-->
+                <!--ログインしているユーザーのidを取得したい場合はcurrent_user.id-->
+                <% if @user.id == current_user.id %>
+                 <td class="is-size-4">
+                  <!--showアクションで定義した@userのemailを表示させる-->
+                  <%= @user.email %>
+                 </td>
+                 <!--編集のリンクを作成、パスの後ろには同様にどのユーザーの編集画面に行くのかを示すために引数の@userを渡す-->
+                 <td>
+                  <%= link_to "編集", edit_user_path(@user), class: "button is-primary" %>
+                 </td>
+                <% end %>
               </tr>
             </table>
             <table class="table is-fullwidth">

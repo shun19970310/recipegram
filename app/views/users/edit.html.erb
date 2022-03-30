@@ -1,2 +1,44 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<section class="hero is-success">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        ユーザー編集
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+<!--フォームタグを作成したいので、form_for（ヘルパーメソッド）を使う-->
+<!--form_for @userや＠postなどのモデルオブジェクト do |f|-->
+       <%= form_for @user do |f| %>
+        <div class="field">
+         <%= f.label :username, "ユーザー名", class: "label" %>
+         <%= f.text_field :username, class: "input" %>
+        </div>
+
+        <div class="field">
+         <%= f.label :email, "メールアドレス", class: "label" %>
+         <%= f.text_field :email, class: "input"%>
+        </div>
+
+        <div class="field">
+         <!--プロフィール欄は書くことが多いので、class: "textarea"-->
+         <%= f.label :profile, "プロフィール", class: "label" %>
+         <%= f.text_field :profile, class: "textarea" %>
+        </div>
+
+        <div class="field">
+<!--画像表示はattachmentメソッドを使っているので、同様にattachment-->
+         <%= f.label :profile_image, "プロフィール画像", class: "label" %>
+         <%= f.attachment_field :profile_image, class: "input" %>
+        </div>
+
+        <%= f.submit "更新", class: "button is-success" %>
+       <% end %>
+      </div>
+    </div>
+  </div>
+</section>
