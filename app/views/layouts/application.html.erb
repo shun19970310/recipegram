@@ -34,34 +34,43 @@
     <!--ログアウトとかだけならlink_toの中に直接書いてもOK、メソッドが違う場合はパスの後に記述必須で今回はmethod: :delete-->
     <!--ログインしている時にはログアウトボタンのみ、ログアウト時にはログイン・新規登録ボタンを表示させたいので以下if文を使用-->
     <% if user_signed_in? %>
-     <div id="navbarExampleTransparentExample" class="navbar-menu">
-      <div class="navbar-item">
-      </div>
-       <div class="navbar-end">
-        <div class="navbar-item">
-         <div class="field is-grouped">
-          <p class="control">
-           <!--ログインしてもしてなくても表示したいので、elseの中にも記述-->
-           <%= link_to "レシピグラマー一覧", users_path, class: "button is-warnimg is-light" %>
-          </p>
-          <p class="control">
-           <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-warnimg is-light" %>
-          </p>
-         </div>
+        <div id="navbarExampleTransparentExample" class="navbar-menu">
+          <div class="navbar-item">
+            <%= link_to "レシピ一覧", recipes_path, class: "navbar-item button is-warning is-light" %>
+          </div>
+          <div class="navbar-item">
+            <%= link_to "レシピ投稿", new_recipe_path, class: "navbar-item button is-warning is-light" %>
+          </div>
+
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control">
+                  <%= link_to "レシピグラマー一覧", users_path, class: " button is-warning is-light" %>
+                </p>
+                <p class="control">
+                  <%= link_to "マイページ", user_path(current_user), class: "button is-warning is-light" %>
+                </p>
+                <p class="control">
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-warning is-light" %>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-       </div>
-     </div>
     <% else %>
      <div id="navbarExampleTransparentExample" class="navbar-menu">
       <div class="navbar-item">
+       <%= link_to "レシピ一覧", recipes_path, class: "navbar-item button is-warning is-light" %>
+      </div>
+      <div class="navbar-item">
+           <!--ユーザーの一覧ページに遷移したいので、users_path（一覧は複数なのでusersと予想できる）-->
+           <%= link_to "レシピグラマー一覧", users_path, class: "navbar-item button is-warnimg is-light" %>
       </div>
        <div class="navbar-end">
         <div class="navbar-item">
          <div class="field is-grouped">
-          <p class="control">
-           <!--ユーザーの一覧ページに遷移したいので、users_path（一覧は複数なのでusersと予想できる）-->
-           <%= link_to "レシピグラマー一覧", users_path, class: "button is-warnimg is-light" %>
-          </p>
+
           <p class="control">
            <%= link_to "ログイン", new_user_session_path, class: "button is-warnimg is-light" %>
           </p>

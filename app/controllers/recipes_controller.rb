@@ -1,9 +1,11 @@
 class RecipesController < ApplicationController
   def index
+    # 登録されているデータを全て取得
+    @recipes = Recipe.all
   end
 
   def show
-    # 一つのレシピの情報を取得し、@userに代入している
+    # 一つのレシピの情報を取得し、@recipeに代入している
     # params[:id]はカーソルを合わせた時に出てくるusers/1といった各々のidを持ってきている
     @recipe = Recipe.find(params[:id])
   end
@@ -15,15 +17,40 @@ class RecipesController < ApplicationController
   # データベースに登録するアクション
   def create
     @recipe = Recipe.new(recipe_params)
-    # 誰が投稿したのか、user_id（カラム）に今ログインしている人のid（current_user.id）を持たせる必要がある
+    # 誰が投稿したのか(投稿した人の情報を取得)、user_id（カラム）に今ログインしている人のid（current_user.id）を持たせる必要がある
     @recipe.user_id = current_user.id
     @recipe.save
+    # レシピの詳細画面に遷移（どのレシピに遷移するかを指定）
     redirect_to recipe_path(@recipe)
   end
 
   def edit
+    # 編集したいレシピを一つ取得し、代入
+    @recipe = Recipe.find(params[:id])
+    # @recipeに結びついているuser_idとログインしている人が等しくない場合は編集させたくない
+    if @recipe.user_id != current_user.id
+      redirect_to recipes_path(@recipe), alert:'不正なアクセスです'
+    end
   end
 
+  def update
+    # 更新する一つのデータを取得
+    @recipe = Recipe.find(params[:id])
+    # どのカラムをアップデートするのかを許可
+    @recipe.update(recipe_params)
+    # レシピの詳細画面に遷移（どのレシピに遷移するかを指定）
+    # update内の@recipeとパスの引数である@recipeは一致している
+    redirect_to recipe_path(@recipe)
+  end
+  def destroy
+    # 削除するデータを一つ取得
+    recipe = Recipe.find(params[:id])
+    # それを削除
+    recipe.destroy
+    # 削除後、レシピの一覧に遷移
+    redirect_to recipes_path
+
+  end
   private
   def recipe_params
     params.require(:recipe).permit(:title,:body, :image)
