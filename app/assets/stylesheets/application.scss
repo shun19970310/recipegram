@@ -24,3 +24,10 @@
   border-radius: 50%;
 }
 
+.main-image {
+  height: 940px;
+  background-image: url(italy.jpg);
+  // 写真が余ったら繰り返されることを防止
+  background-repeat: no-repeat;
+  background-size:contain;
+}

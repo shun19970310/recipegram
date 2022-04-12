@@ -8,4 +8,6 @@ class User < ApplicationRecord
   # アソシエーション：一ユーザーにたくさんのrecipesが紐づく、dependent: :destroyはユーザーが削除されたら紐づいているrecipesも削除
   has_many :recipes,dependent: :destroy
 
+  validates :username, presence: true
+
 end

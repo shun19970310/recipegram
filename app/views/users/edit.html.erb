@@ -7,6 +7,20 @@
     </div>
   </div>
 </section>
+<!--エラーメッセージの表示-->
+<% if @user.errors.any? %>
+  <div class="notification is-danger">
+    <!--pluralize:単語の単数形か複数形かを判定（"error"を用い、errorが一つならerrorで二つ以上ならerrors）-->
+    <!--@recipe.errors.count:エラーの数をカウント-->
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this object from being saved: not successfully</h2>
+    <ul>
+      <!--全てのエラーメッセージをeach処理で取り出し、変数messageに代入-->
+      <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
